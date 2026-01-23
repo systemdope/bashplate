@@ -4,19 +4,21 @@
 #
 # This information may also appear in the Script Metadata section.
 #
-# Script Name: hello
-# Description: hello - is a script template with a number of useful features
+# Script Name: bashplate
+# Description: bashplate - is a script template with several useful features:
 # - error handling
 # - argument processing
 # - temporary directory and files
 # - TODO config file
 # - TODO logging
 # - TODO debug
+# - TODO parameter expansion substitution ${STR_VAR//old/new}
+# - TODO GNU parallel
 # - cleanup upon exit
 #
 # Author:
 # Email:
-# Project Homepage: https://github.com/systemdope/bash_template
+# Project Homepage: https://github.com/systemdope/bashplate
 
 # Notes #######################################################################
 #
@@ -27,7 +29,7 @@
 # TODO use FIXME codetags to document bugs or poorly-implemented code
 # TODO sparingly use XXX codetags to highlight critical or important issues
 # TODO debug by surrounding code blocks with -x and +x to see commands
-# TODO debug script via 'bash -x hello.sh' to see executed commands
+# TODO debug script via 'bash -x bashplate' to see executed commands
 # TODO style inline comments with two leading spaces  # like this
 # TODO style headers with "#" to column 79
 # TODO style headers with one blank line above
@@ -50,11 +52,11 @@ trap cleanup SIGINT  # generated on ctrl-c
 #
 # # Information about this script, held in constants.
 
-SCRIPT_NAME="hello"
+SCRIPT_NAME="bashplate"
 SCRIPT_VERSION="0.0.1"
 SCRIPT_LICENSE="gplv3"
 SYSTEM_DOPE_VERSION="0.0.1"
-SCRIPT_HOMEPAGE="https://github.com/systemdope/bash_template"
+SCRIPT_HOMEPAGE="https://github.com/systemdope/bashplate"
 DESCRIPTION="Template for SystemDope bash scripts"
 AUTHOR_NAME=""
 AUTHOR_EMAIL=""
@@ -88,7 +90,7 @@ Source: ${SCRIPT_HOMEPAGE}"  # notice the closing quote on the last line here
 
 # Function Declarations #######################################################
 #
-# Tip: List all functions/descriptions via "grep Description hello.sh"
+# Tip: List all functions/descriptions via "grep Description bashplate.sh"
 # TODO improve how functions return/exit
 
 # Description: permaloop - loops forever, for testing and debugging

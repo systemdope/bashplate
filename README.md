@@ -1,2 +1,2 @@
-# bash_template
+# bashplate
 Template for bash scripts
