@@ -4,6 +4,7 @@
 
 # Script Name: bashplate
 # Description: bashplate - is a script template with several useful features:
+# - TODO gettext translation. For example see, $ vim $(which ldd)
 # - error handling
 # - argument processing
 # - temporary directory and files
@@ -11,6 +12,7 @@
 # - TODO logging
 # - TODO debug
 # - parameter expansion substitution ${STR_VAR//old/new}
+# - TODO parameter expansion variable: MY_TERM="${TERM:-"xterm-256color"}"
 # - command processing (non-flag)
 # - TODO GNU parallel
 # - cleanup upon exit
@@ -23,6 +25,7 @@
 #
 # Notes can be added here as well as any script-wide todo items.
 #
+# TodDo Items
 # TODO place here all todo items with script-wide relevance
 # TODO try to keep the todo items grouped and ordered in a reasonable manner
 # TODO use FIXME codetags to document bugs or poorly-implemented code
@@ -100,7 +103,6 @@ String Substitutions:
   %%t    TERM      terminal name
   %%u    USER      user name
 
-
 Author: ${AUTHOR_NAME}
 Source: ${SCRIPT_HOMEPAGE}"  # notice the closing quote on the last line here
 
@@ -167,6 +169,7 @@ function debug {
 while [[ $# -gt 0 ]]; do  # $# is the number of script arguments
 	case "${1}" in
 	# Flag Arguments
+		# Configuration file
 		-c|--config)
 			shift
 			if [[ $# -gt 0 ]]; then
@@ -185,6 +188,7 @@ while [[ $# -gt 0 ]]; do  # $# is the number of script arguments
 			printf "bad format\n"
 			exit 1
 			;;
+		# Greeting string
 		-g|--greeting)
 			shift
 			if [[ $# -gt 0 ]]; then
@@ -203,15 +207,18 @@ while [[ $# -gt 0 ]]; do  # $# is the number of script arguments
 			printf "bad format\n"
 			exit 1
 			;;
+		# Help message
 		-h|--help)
 			usage
 			#printf "${USAGE}\n"
 			exit
 			;;
+		# License
 		--license)
 			printf "${SCRIPT_LICENSE}\n"
 			exit
 			;;
+		# user-input string
 		-s|--string)  # format: --string "hello there"
 			shift
 			if [[ $# -gt 0 ]]; then
@@ -230,19 +237,23 @@ while [[ $# -gt 0 ]]; do  # $# is the number of script arguments
 			printf "bad format\n"
 			exit 1
 			;;
+		# software version
 		-v|--version)
 			printf "${SCRIPT_NAME} ${SCRIPT_VERSION}\n"
 			exit
 			;;
 	# Non-flag Arguments
+		# debug output
 		debug|greet)
 			COMMAND="${1}"
 			shift
 			;;
+		# catch-all unknown flags
 		-?*)
 			printf "Unknown flag: ${1}\n"
 			exit 1
 			;;
+		# Catch-all undefined
 		*)
 			printf "Unknown command: ${1}\n"
 			exit 1
@@ -268,6 +279,7 @@ esac
 #
 # TODO create a string substitution function
 
+# ${VARIABLE_STRING//OLD_SUB_STRING/NEW_SUB_STRING}
 IN_STRING="${IN_STRING//\%t/${TERM}}"  # replace %t with $TERM
 IN_STRING="${IN_STRING//\%u/${USER}}"  # replace %u with $USER
 
